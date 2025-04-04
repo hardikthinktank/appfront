@@ -1,32 +1,55 @@
-### Laravel Developer Test Task
+# AppFront - Laravel Setup Guide
 
-You are provided with a small Laravel application that displays a list of products and individual product details. Additionally, the application includes an admin interface for editing products, or alternatively, products can be edited using a command-line command.
+This repository contains the Laravel-based AppFront application. Follow the instructions below to set up and run the project locally.
 
-### Task Objectives
-Your goal is to refactor the provided application, focusing on the following:
+## Requirements
 
-- **Code Refactoring:**
-  - Improve the overall quality, readability, and maintainability of the code.
-  - **Apply Laravel best practices, design patterns, and standards suitable for enterprise-level applications.**
+- PHP >= 8.2
+- Composer
+- Laravel 10+
+- MySQL
 
-- **Bug Fixing:**
-  - Identify and fix any existing bugs.
+---
 
-- **Security Audit:**
-  - Perform a thorough security review.
-  - Implement necessary fixes and enhancements to secure the application.
+## Installation
 
-- **Improvements:**
-  - Implement any additional improvements that you consider beneficial (performance optimization, better code organization, etc.).
+1. **Clone the Repository**
 
-### Important Constraints
-1. The visual appearance of the application in the browser must remain exactly the same.
-2. The existing functionality must be preserved completely.
-3. The structure of the database cannot be changed.
+```bash
+git clone https://github.com/hardikthinktank/appfront
+cd appfront
 
-Your final submission should demonstrate your ability to write clean, secure, and maintainable code adhering to industry standards.
+#Install PHP Dependencies
+composer install
 
-**Submission:**  
-Please provide a link to your public repository containing the refactored and improved code.
+#Copy the example environment configuration:
+cp .env.example .env
 
-Additionally, you may optionally include a list detailing the changes you've made or suggestions for further improvements.
+#Update .env with your local database and mail configuration:\
+
+DB_DATABASE=appfront
+DB_USERNAME=root
+DB_PASSWORD=
+
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=your-email@gmail.com
+MAIL_PASSWORD=your-app-password
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=your-email@gmail.com
+MAIL_FROM_NAME="${APP_NAME}"
+
+#Run Migrations
+php artisan migrate
+
+#Seed the Database 
+php artisan db:seed
+
+#Start the Server
+php artisan serve
+
+# update a product and trigger a price change notification
+php artisan product:update {id} --name="New Name" --price=123.45
+
+
